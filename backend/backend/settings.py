@@ -4,6 +4,8 @@ This module contains the settings and configurations for the Django application~
 including database connections, installed apps, middleware, and other configurations.
 """
 
+# pylint: disable=invalid-name
+
 import os
 import sys
 from datetime import timedelta
@@ -49,6 +51,7 @@ EMAIL_USE_TLS: bool = os.environ.get("DJANGO_EMAIL_USE_TLS", "True") == "True"
 EMAIL_HOST_USER: str | None = os.environ.get("DJANGO_EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD: str | None = os.environ.get("DJANGO_EMAIL_HOST_PASSWORD")
 
+FRONTEND_URL: str = os.environ.get("FRONTEND_URL", "http://localhost:3000")
 
 INSTALLED_APPS: list[str] = [
     "jazzmin",
