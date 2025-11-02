@@ -15,6 +15,7 @@ Example:
 from typing import List, Type
 from uuid import UUID
 
+from django.conf import settings
 from django.contrib.auth.tokens import default_token_generator
 from django.core.mail import send_mail
 from django.db import IntegrityError
@@ -70,7 +71,7 @@ class UserRegisterView(APIView):
         """
         return self.queryset
 
-    def post(self, request: Request, *args, **kwargs) -> Response:
+    def post(self, request: Request) -> Response:
         """Create a new user with the provided data.
 
         Args:
@@ -95,14 +96,12 @@ class UserRegisterView(APIView):
             user_id: UUID = new_user.id
             token: str = default_token_generator.make_token(new_user)
 
-            activation_link: str = (
-                f"http://localhost:8000/api/v1/profile/{user_id}/activate/{token}/"
-            )
+            activation_link: str = f"{settings.FRONTEND_URL}/activate/{user_id}/{token}/"
 
             send_mail(
                 subject="Activate your account",
                 message=f"Click the link to activate your account: {activation_link}",
-                from_email="noreply@yourdomain.com",
+                from_email=f"{settings.EMAIL_HOST_USER}",
                 recipient_list=[new_user.email],
             )
 
