@@ -90,7 +90,7 @@ class TaskViewSet(ModelViewSet):
         pk: UUID | None = kwargs.get("pk")
 
         task: Task = get_object_or_404(
-            Task, pk=pk, board_id=board_id, board_user_id=request.user.id
+            Task, pk=pk, board_id=board_id, board__user_id=request.user.id
         )
 
         serializer: TaskSerializerV1 = self.get_serializer(task)
@@ -125,7 +125,7 @@ class TaskViewSet(ModelViewSet):
         pk: UUID | None = kwargs.get("pk")
 
         task: Task = get_object_or_404(
-            Task, pk=pk, board_id=board_id, board_user_id=request.user.id
+            Task, pk=pk, board_id=board_id, board__user_id=request.user.id
         )
         serializer: TaskSerializerV1 = self.get_serializer(
             task,
@@ -149,7 +149,7 @@ class TaskViewSet(ModelViewSet):
         pk: UUID | None = kwargs.get("pk")
 
         task: Task = get_object_or_404(
-            Task, pk=pk, board_id=board_id, board_user_id=request.user.id
+            Task, pk=pk, board_id=board_id, board__user_id=request.user.id
         )
         task.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
