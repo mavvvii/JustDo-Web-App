@@ -96,7 +96,7 @@ class UserRegisterView(APIView):
             user_id: UUID = new_user.id
             token: str = default_token_generator.make_token(new_user)
 
-            activation_link: str = f"{settings.FRONTEND_URL}/activate?=user_id={user_id}&token={token}/"
+            activation_link: str = f"{settings.FRONTEND_URL}/activate?user_id={user_id}&token={token}/"
 
             send_mail(
                 subject="Activate your account",
