@@ -1,0 +1,562 @@
+<nav class="glass-nav" id="main-navigation">
+    <div class="container-responsive">
+        <div class="d-flex justify-content-between align-items-center">
+            <!-- Brand Logo -->
+            <div class="nav-brand">
+                <a href="index.html" class="text-decoration-none">
+                    <span class="logo-text">JustDo</span>
+                </a>
+            </div>
+
+            <!-- Desktop Menu -->
+            <div class="nav-desktop-menu d-flex align-items-center gap-3">
+                <!-- Boards Navigation -->
+                <div class="d-flex align-items-center overflow-auto boards-nav-container"
+                     style="white-space: nowrap; max-width: 300px;">
+                    <div class="d-flex align-items-center gap-2" id="board-nav">
+                        <!-- Boards will be loaded here dynamically -->
+                    </div>
+                </div>
+
+                <!-- User Menu -->
+                <div class="dropdown">
+                    <button class="btn btn-secondary-glass btn-sm dropdown-toggle d-flex align-items-center gap-2"
+                            type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <span class="user-avatar">👤</span>
+                        <span class="d-none d-md-inline" id="user-menu-name">User</span>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end glass-dropdown">
+                        <li>
+                            <a class="dropdown-item" href="profile.html">
+                                <span class="d-flex align-items-center gap-2">
+                                    <span>👤</span>
+                                    <span>My Profile</span>
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="dashboard.html">
+                                <span class="d-flex align-items-center gap-2">
+                                    <span>📊</span>
+                                    <span>Dashboard</span>
+                                </span>
+                            </a>
+                        </li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <a class="dropdown-item" href="about.html">
+                                <span class="d-flex align-items-center gap-2">
+                                    <span>ℹ️</span>
+                                    <span>About</span>
+                                </span>
+                            </a>
+                        </li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <button class="dropdown-item text-danger" onclick="logout()">
+                                <span class="d-flex align-items-center gap-2">
+                                    <span>🚪</span>
+                                    <span>Logout</span>
+                                </span>
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="d-flex gap-2 quick-actions-nav">
+                    <button class="btn btn-success-gradient btn-sm"
+                            onclick="loadView('./forms/boards/create.html')"
+                            title="Create Board">
+                        <span class="d-flex align-items-center gap-1">
+                            <span>+</span>
+                            <span class="d-none d-sm-inline">Create</span>
+                        </span>
+                    </button>
+                    <button class="btn btn-primary-gradient btn-sm"
+                            onclick="loadView('./forms/boards/update.html')"
+                            title="Update Board">
+                        <span class="d-flex align-items-center gap-1">
+                            <span>✏️</span>
+                            <span class="d-none d-sm-inline">Edit</span>
+                        </span>
+                    </button>
+                    <button class="btn btn-danger-gradient btn-sm"
+                            onclick="loadView('./forms/boards/delete.html')"
+                            title="Delete Board">
+                        <span class="d-flex align-items-center gap-1">
+                            <span>🗑️</span>
+                            <span class="d-none d-sm-inline">Delete</span>
+                        </span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button class="nav-mobile-menu btn btn-secondary-glass btn-sm"
+                    type="button"
+                    onclick="toggleMobileMenu()">
+                <span class="d-flex align-items-center gap-1">
+                    <span>☰</span>
+                </span>
+            </button>
+        </div>
+    </div>
+</nav>
+
+<!-- Mobile Menu Overlay -->
+<div class="mobile-menu-overlay" id="mobileMenuOverlay">
+    <div class="mobile-menu-content">
+        <div class="mobile-menu-header">
+            <div class="nav-brand">
+                <span class="logo-text">JustDo</span>
+            </div>
+            <button class="btn-close-mobile" onclick="toggleMobileMenu()">
+                <span>✕</span>
+            </button>
+        </div>
+
+        <div class="mobile-menu-body">
+            <!-- User Info -->
+            <div class="mobile-user-info">
+                <div class="user-avatar-mobile">👤</div>
+                <div class="user-info">
+                    <div class="user-name" id="mobile-user-name">User</div>
+                    <div class="user-email" id="mobile-user-email">user@example.com</div>
+                </div>
+            </div>
+
+            <!-- Navigation Links -->
+            <div class="mobile-nav-links">
+                <a href="dashboard.html" class="mobile-nav-link" onclick="toggleMobileMenu()">
+                    <span class="nav-icon">📊</span>
+                    <span class="nav-label">Dashboard</span>
+                </a>
+                <a href="profile.html" class="mobile-nav-link" onclick="toggleMobileMenu()">
+                    <span class="nav-icon">👤</span>
+                    <span class="nav-label">My Profile</span>
+                </a>
+                <a href="about.html" class="mobile-nav-link" onclick="toggleMobileMenu()">
+                    <span class="nav-icon">ℹ️</span>
+                    <span class="nav-label">About</span>
+                </a>
+
+                <!-- Quick Actions -->
+                <div class="mobile-quick-actions">
+                    <button class="mobile-action-btn" onclick="loadView('./forms/boards/create.html'); toggleMobileMenu();">
+                        <span class="action-icon">+</span>
+                        <span class="action-label">Create Board</span>
+                    </button>
+                    <button class="mobile-action-btn" onclick="loadView('./forms/boards/update.html'); toggleMobileMenu();">
+                        <span class="action-icon">✏️</span>
+                        <span class="action-label">Edit Board</span>
+                    </button>
+                    <button class="mobile-action-btn" onclick="loadView('./forms/boards/delete.html'); toggleMobileMenu();">
+                        <span class="action-icon">🗑️</span>
+                        <span class="action-label">Delete Board</span>
+                    </button>
+                </div>
+
+                <!-- Boards List -->
+                <div class="mobile-boards-section">
+                    <h6 class="section-title">Your Boards</h6>
+                    <div class="mobile-boards-list" id="mobile-board-nav">
+                        <!-- Boards will be loaded here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mobile-menu-footer">
+            <button class="btn btn-danger-gradient btn-full" onclick="logout()">
+                <span class="d-flex align-items-center gap-2 justify-content-center">
+                    <span>🚪</span>
+                    <span>Logout</span>
+                </span>
+            </button>
+        </div>
+    </div>
+</div>
+
+<style>
+/* Navigation Styles */
+.glass-nav {
+    background: var(--card-bg);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--card-border);
+    padding: 1rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    transition: all 0.3s ease;
+}
+
+.nav-brand .logo-text {
+    font-size: 1.5rem;
+    font-weight: 700;
+    background: var(--primary-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-decoration: none;
+}
+
+.user-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--primary-gradient);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+}
+
+/* Dropdown Styles */
+.glass-dropdown {
+    background: var(--card-bg);
+    backdrop-filter: blur(30px);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.glass-dropdown .dropdown-item {
+    padding: 0.75rem 1rem;
+    color: var(--text-dark);
+    transition: all 0.3s ease;
+    border-radius: 8px;
+    margin: 0.1rem 0.5rem;
+    width: auto;
+}
+
+.glass-dropdown .dropdown-item:hover {
+    background: rgba(102, 126, 234, 0.1);
+    transform: translateX(5px);
+}
+
+/* Mobile Menu Styles */
+.mobile-menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+    z-index: 2000;
+    display: none;
+    animation: fadeIn 0.3s ease;
+}
+
+.mobile-menu-overlay.active {
+    display: block;
+}
+
+.mobile-menu-content {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 320px;
+    height: 100%;
+    background: var(--card-bg);
+    backdrop-filter: blur(30px);
+    border-left: 1px solid var(--card-border);
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.mobile-menu-overlay.active .mobile-menu-content {
+    transform: translateX(0);
+}
+
+.mobile-menu-header {
+    padding: 1.5rem;
+    border-bottom: 1px solid var(--card-border);
+    display: flex;
+    justify-content: between;
+    align-items: center;
+}
+
+.btn-close-mobile {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: var(--text-muted);
+    cursor: pointer;
+    padding: 0.5rem;
+}
+
+.mobile-menu-body {
+    flex: 1;
+    overflow-y: auto;
+    padding: 1rem;
+}
+
+.mobile-user-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    margin-bottom: 1.5rem;
+}
+
+.user-avatar-mobile {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: var(--primary-gradient);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+}
+
+.user-info {
+    flex: 1;
+}
+
+.user-name {
+    font-weight: 600;
+    color: var(--text-dark);
+    margin-bottom: 0.25rem;
+}
+
+.user-email {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+}
+
+.mobile-nav-links {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.mobile-nav-link {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    color: var(--text-dark);
+    text-decoration: none;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+}
+
+.mobile-nav-link:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateX(5px);
+    color: var(--text-dark);
+    text-decoration: none;
+}
+
+.nav-icon {
+    font-size: 1.25rem;
+    width: 24px;
+    text-align: center;
+}
+
+.mobile-quick-actions {
+    margin: 1.5rem 0;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+}
+
+.mobile-action-btn {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+    padding: 0.75rem;
+    background: none;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    color: var(--text-dark);
+    transition: all 0.3s ease;
+    margin-bottom: 0.5rem;
+}
+
+.mobile-action-btn:last-child {
+    margin-bottom: 0;
+}
+
+.mobile-action-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateX(5px);
+}
+
+.action-icon {
+    font-size: 1.1rem;
+    width: 20px;
+    text-align: center;
+}
+
+.mobile-boards-section {
+    margin-top: 1.5rem;
+}
+
+.section-title {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.75rem;
+    padding: 0 1rem;
+}
+
+.mobile-boards-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.mobile-board-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.75rem 1rem;
+    color: var(--text-dark);
+    text-decoration: none;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+}
+
+.mobile-board-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+    text-decoration: none;
+    color: var(--text-dark);
+}
+
+.mobile-menu-footer {
+    padding: 1.5rem;
+    border-top: 1px solid var(--card-border);
+}
+
+.btn-full {
+    width: 100%;
+}
+
+/* Responsive Navigation */
+@media (max-width: 768px) {
+    .nav-desktop-menu {
+        display: none !important;
+    }
+
+    .nav-mobile-menu {
+        display: block !important;
+    }
+
+    .boards-nav-container {
+        max-width: 200px !important;
+    }
+}
+
+@media (min-width: 769px) {
+    .nav-mobile-menu {
+        display: none !important;
+    }
+
+    .mobile-menu-overlay {
+        display: none !important;
+    }
+}
+
+/* Scrollbar styling for boards navigation */
+.boards-nav-container::-webkit-scrollbar {
+    height: 4px;
+}
+
+.boards-nav-container::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 2px;
+}
+
+.boards-nav-container::-webkit-scrollbar-thumb {
+    background: var(--primary-gradient);
+    border-radius: 2px;
+}
+
+/* Animation for mobile menu */
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideOutRight {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(100%);
+    }
+}
+</style>
+
+<script>
+// Navigation functionality
+function toggleMobileMenu() {
+    const overlay = document.getElementById('mobileMenuOverlay');
+    overlay.classList.toggle('active');
+
+    // Prevent body scroll when menu is open
+    document.body.style.overflow = overlay.classList.contains('active') ? 'hidden' : '';
+}
+
+function logout() {
+    if (confirm('Are you sure you want to logout?')) {
+        // In a real app, this would call your logout API
+        window.location.href = 'index.html';
+    }
+}
+
+// Close mobile menu when clicking outside
+document.addEventListener('click', function(event) {
+    const overlay = document.getElementById('mobileMenuOverlay');
+    const mobileMenu = document.querySelector('.mobile-menu-content');
+
+    if (overlay.classList.contains('active') &&
+        !mobileMenu.contains(event.target) &&
+        !event.target.closest('.nav-mobile-menu')) {
+        toggleMobileMenu();
+    }
+});
+
+// Close mobile menu on escape key
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape') {
+        const overlay = document.getElementById('mobileMenuOverlay');
+        if (overlay.classList.contains('active')) {
+            toggleMobileMenu();
+        }
+    }
+});
+
+// Load user data for navigation
+function loadNavigationUserData() {
+    // This would typically come from your API
+    const userData = {
+        name: 'John Doe',
+        email: 'john.doe@example.com'
+    };
+
+    // Update desktop and mobile user info
+    document.getElementById('user-menu-name').textContent = userData.name;
+    document.getElementById('mobile-user-name').textContent = userData.name;
+    document.getElementById('mobile-user-email').textContent = userData.email;
+}
+
+// Initialize navigation when component loads
+document.addEventListener('DOMContentLoaded', function() {
+    loadNavigationUserData();
+});
+</script>

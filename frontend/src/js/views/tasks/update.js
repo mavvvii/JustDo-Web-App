@@ -52,7 +52,12 @@ export function mountUpdateTask(boardId, task, onUpdateCallback) {
       if (view) {
         view.classList.add('fade-out');
         view.addEventListener('animationend', () => {
-          view.innerHTML = '';
+          const wrapper = view.closest('.loaded-view');
+          if (wrapper && wrapper.parentNode) {
+            wrapper.parentNode.removeChild(wrapper);
+          } else if (view.parentNode) {
+            view.parentNode.removeChild(view);
+          }
         }, { once: true });
       }
     },

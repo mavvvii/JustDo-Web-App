@@ -1,0 +1,38 @@
+<div id="register-app" v-scope class="floating-center-form">
+  <div class="card activation-card glass-card w-100" style="max-width: 520px;">
+    <div class="card-body position-relative p-4 p-md-5 text-center">
+
+      <div class="logo-container mb-3">
+        <div class="logo">JustDo</div>
+        <div class="logo-subtitle">Join us</div>
+      </div>
+
+      <h2 class="card-title text-white text-center mb-3">Create your account</h2>
+
+      <input v-model="username" class="form-control text-center mb-3 form-control-lg rounded-pill" placeholder="Username" />
+      <input v-model="email" class="form-control text-center mb-3 form-control-lg rounded-pill" placeholder="Email" />
+      <input v-model="password" class="form-control text-center mb-3 form-control-lg rounded-pill" type="password" placeholder="Password" />
+
+      <div class="d-flex justify-content-center">
+        <button @click="register" class="btn btn-primary-gradient btn-lg px-4">Register</button>
+      </div>
+
+      <button @click="closeRegisterView" type="button"
+        class="btn-close position-absolute top-0 end-0 m-3"
+        aria-label="Close"></button>
+
+      <p v-if="errorMessage" class="mt-3 text-danger text-center">{{ errorMessage }}</p>
+    </div>
+  </div>
+
+  <div v-if="showModal" class="modal-backdrop d-flex align-items-center justify-content-center"
+    style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1050;">
+
+    <div class="bg-white p-4 rounded shadow position-relative" style="max-width: 400px;">
+      <h5 class="mb-2">{{ modalTitle }}</h5>
+      <p>{{ modalMessage }}</p>
+      <button class="btn btn-secondary mt-2" @click="closeModal">Close</button>
+    </div>
+
+  </div>
+</div>

@@ -27,3 +27,66 @@
     <div class="particle" style="top: 2%; left: 5%; animation-duration: 6s;"></div>
     <div class="particle" style="top: 1%; left: 5%; animation-duration: 4s;"></div>
 </div>
+
+<style>
+.particles-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.particle {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 50%;
+    opacity: 0.6;
+    width: 4px;
+    height: 4px;
+    animation: floatParticle linear infinite;
+}
+
+@keyframes floatParticle {
+    0% {
+        transform: translateY(0) translateX(0);
+        opacity: 0.6;
+    }
+    50% {
+        opacity: 0.2;
+    }
+    100% {
+        transform: translateY(-100vh) translateX(50vw);
+        opacity: 0;
+    }
+}
+
+/* Enhanced particle effects */
+.particle:nth-child(3n) {
+    background: rgba(102, 126, 234, 0.4);
+    width: 3px;
+    height: 3px;
+}
+
+.particle:nth-child(3n+1) {
+    background: rgba(118, 75, 162, 0.4);
+    width: 2px;
+    height: 2px;
+}
+
+.particle:nth-child(5n) {
+    background: rgba(255, 255, 255, 0.8);
+    width: 1px;
+    height: 1px;
+}
+
+/* Responsive particles */
+@media (max-width: 768px) {
+    .particles-container {
+        display: none; /* Hide particles on mobile for better performance */
+    }
+}
+</style>

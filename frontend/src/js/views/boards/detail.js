@@ -59,16 +59,30 @@ export function mountBoardDetail() {
     },
 
     async updateTaskStatus(taskId, status) {
+      let prevStatus = null;
       try {
-        const task = this.tasks.find(t => t.id === taskId);
+        const idx = this.tasks.findIndex(t => t.id === taskId);
+        if (idx === -1) throw new Error('Task not found');
 
-        if (!task) throw new Error('Task not found');
+        // optimistic update: change status locally so UI updates immediately
+        prevStatus = this.tasks[idx].status;
+        this.tasks[idx].status = status;
+        // mark as updating (can be used by UI if desired)
+        this.tasks[idx].isUpdating = true;
 
-        await updateTask(this.board.id, taskId, null, null, status, null);
-        await this.fetchData();
+        const updated = await updateTask(this.board.id, taskId, null, null, status, null);
+
+        // merge server response into local task to keep data consistent
+        this.tasks[idx] = Object.assign({}, this.tasks[idx], updated);
+        if (this.tasks[idx].isUpdating) delete this.tasks[idx].isUpdating;
 
       } catch (err) {
         console.error('Error during update task status:', err);
+        // revert optimistic change if possible
+        const t = this.tasks.find(t => t.id === taskId);
+        if (t && prevStatus !== null) t.status = prevStatus;
+        if (t && t.isUpdating) delete t.isUpdating;
+        this.errorMessage = 'Failed to update task: ' + (err.message || 'Unknown error');
       }
 
     },

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>JustDo - Organize your tasks</title>
+  <title>JustDo - Organize Your Tasks Efficiently</title>
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet" />
@@ -12,63 +12,108 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
 
-  <!-- MDB UI Kit -->
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.0.0/mdb.min.css" rel="stylesheet" />
-
   <!-- Font Awesome -->
   <script src="https://kit.fontawesome.com/51ac1b0565.js" crossorigin="anonymous"></script>
 
   <!-- Custom CSS -->
   <link href="css/main.css" rel="stylesheet" />
   <link href="css/index.css" rel="stylesheet" />
-  <link href="css/form.css" rel="stylesheet" />
-
+  <link href="css/forms.css" rel="stylesheet" />
+  <link href="css/animations.css" rel="stylesheet" />
+  <link href="css/components.css" rel="stylesheet" />
+  <link href="css/responsive.css" rel="stylesheet" />
 </head>
 <body>
-  <div class="container vh-100">
-    <div id="content-area" class="container"></div>
-    <div id="particles-placeholder"></div>
-    <div class="row gx-lg-5 h-100 d-flex align-content-center text-white">
-      <div class="col-md-6 mb-4 mb-md-0 d-flex align-items-center">
-        <div class="animation-delay fade">
+  <!-- Containers required by scripts: content-area (for loadView) and particles placeholder -->
+  <div id="content-area" class="container"></div>
+  <div id="particles-placeholder"></div>
 
-          <h1 class="mb-4 opacity-90" style="color: hsl(218, 81%, 95%)">
-            JustDo <i class="fas fa-chalkboard ms-2"></i>
-          </h1>
+  <!-- Use the activation-style centered card layout for a clean landing look -->
+  <div class="activation-container d-flex align-items-center justify-content-center">
+    <!-- Floating shapes for subtle background motion -->
+    <div class="floating-shapes">
+      <div class="shape shape-1"></div>
+      <div class="shape shape-2"></div>
+      <div class="shape shape-3"></div>
+    </div>
 
-          <h5 class="mb-4 opacity-80" style="color: hsl(218, 81%, 90%)">
-            JustDo is a ToDo app that helps you organize your tasks efficiently
-          </h5>
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+          <div class="card activation-card glass-card">
+            <div class="card-body p-5 text-center">
 
-          <button class="btn btn-light btn-rounded btn-lg opacity-80" onclick="loadView('./forms/login.html')">Login</button>
-          <button class="btn btn-light btn-rounded btn-lg opacity-80" onclick="loadView('./forms/register.html')">Register</button>
+              <!-- Logo + subtitle (visual only) -->
+              <div class="logo-container">
+                <div class="logo">JustDo</div>
+                <div class="logo-subtitle">Organize your tasks efficiently</div>
+              </div>
 
-          <a class="btn btn-light btn-rounded btn-lg opacity-80" href="about.html" role="button">
-            About author
-          </a>
+              <!-- Primary content: heading + subtitle -->
+              <div class="state-content">
+                <h2 class="hero-heading mb-3">Organize. Collaborate. Achieve.</h2>
+                <p class="hero-subtitle mb-4">A lightweight, powerful task manager built for teams and individuals.</p>
 
+                <!-- CTA Buttons - preserve existing JS calls (do not change logic) -->
+                <div class="d-flex justify-content-center gap-3 mb-3">
+                  <button class="btn btn-primary-gradient" onclick="loadView('./forms/auth/login.html')">
+                    <i class="fas fa-sign-in-alt me-2"></i>
+                    Sign In
+                  </button>
+                  <button class="btn btn-secondary-glass" onclick="loadView('./forms/auth/register.html')">
+                    <i class="fas fa-user-plus me-2"></i>
+                    Create Account
+                  </button>
+                </div>
+
+                <a class="d-block btn-primary-gradient text-white small mb-2" href="about.html">Learn more about JustDo</a>
+
+                <!-- Small stats row for visual richness -->
+                <div class="row mt-4">
+                  <div class="col-4">
+                    <div class="stat-number text-gradient">10K+</div>
+                    <div class="stat-label small text-white">Users</div>
+                  </div>
+                  <div class="col-4">
+                    <div class="stat-number text-gradient">50K+</div>
+                    <div class="stat-label small text-white">Tasks</div>
+                  </div>
+                  <div class="col-4">
+                    <div class="stat-number text-gradient">99%</div>
+                    <div class="stat-label small text-white">Satisfaction</div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
         </div>
       </div>
-
-      <div class="col-md-5 offset-md-1 mb-4 mb-md-0 position-relative">
-
-        <div id="shape-1" class="position-absolute shadow fade fade-delay-small"></div>
-        <div id="shape-2" class="position-absolute shadow fade fade-delay-medium"></div>
-        <div id="shape-2" class="position-absolute shadow fade fade-delay-small"></div>
-
-      </div>
-
     </div>
   </div>
 
-  <!-- Scripts -->
+  <!-- Keep the existing scripts (do not change logic) -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.2/vanilla-tilt.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.0.0/mdb.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="js/scripts/particles-loader.js"></script>
   <script src="js/scripts/check-login.js"></script>
   <script type="module" src="js/scripts/load-view-handler.js"></script>
+
   <script>
-    checkIfLoggedIn();
+    // preserve checkIfLoggedIn usage from the site
+    document.addEventListener('DOMContentLoaded', function() {
+      if (typeof checkIfLoggedIn === 'function') {
+        checkIfLoggedIn();
+      }
+      // small visual tilt for the card
+      if (typeof VanillaTilt !== 'undefined') {
+        VanillaTilt.init(document.querySelectorAll('.glass-card'), {
+          max: 6,
+          speed: 300,
+          glare: false
+        });
+      }
+    });
   </script>
 </body>
 </html>

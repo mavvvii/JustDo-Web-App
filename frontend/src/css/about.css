@@ -2,25 +2,37 @@
     position: absolute;
     top: 20px;
     right: 20px;
-    z-index: 10;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-}
-
-.center-card {
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    z-index: 60;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+    border-radius: 999px;
+    background: rgba(255,255,255,0.95);
 }
 
 .project-card {
-    border-radius: 15px;
+    border-radius: 16px;
     overflow: hidden;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    box-shadow: 0 25px 50px rgba(0,0,0,0.18);
     transform: translateY(0);
-    transition: transform 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .project-card:hover {
-    transform: translateY(-5px);
+    transform: translateY(-8px);
+}
+
+.project-img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 8px;
+}
+
+/* Ensure inner text uses the theme colors */
+.project-card .card-body { background: transparent; }
+.project-card .card-title { font-weight: 700; }
+
+/* Responsive tweaks */
+@media (max-width: 768px) {
+    .project-card .card-body { text-align: center; }
+    .project-card .logo-subtitle { display: none; }
 }

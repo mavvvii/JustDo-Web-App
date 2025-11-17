@@ -24,9 +24,15 @@ export function mountRegisterView() {
     closeRegisterView() {
       const view = document.getElementById('register-app');
       if (view) {
-        view.innerHTML = '';
+        // animate then remove the loaded wrapper to avoid leaving a full-screen overlay
+        view.classList.add('fade-out');
         view.addEventListener('animationend', () => {
-          view.innerHTML = '';
+          const wrapper = view.closest('.loaded-view');
+          if (wrapper && wrapper.parentNode) {
+            wrapper.parentNode.removeChild(wrapper);
+          } else if (view.parentNode) {
+            view.parentNode.removeChild(view);
+          }
         }, { once: true });
       }
     },

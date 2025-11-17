@@ -1,12 +1,14 @@
 <div id="board-create" v-scope class="floating-center-form">
-  <div class="card shadow-sm w-100" style="max-width: 500px;">
-    <div class="card-body position-relative">
+  <div class="card shadow-sm w-100 activation-card glass-card" style="max-width: 500px;">
+    <div class="card-body position-relative p-4 p-md-5 text-center">
       <h3 class="card-title text-center mb-4">Create Board</h3>
 
-      <input v-model="title" class="form-control mb-3" placeholder="Title" />
-      <textarea v-model="description" class="form-control mb-3" placeholder="Description"></textarea>
+      <input v-model="title" class="form-control text-center mb-3 form-control-lg rounded-pill" placeholder="Title" />
+      <textarea v-model="description" class="form-control text-center mb-3 form-control-lg rounded-pill" rows="4" placeholder="Description"></textarea>
 
-        <button class="btn btn-success" @click="createBoardAction">Save</button>
+      <div class="d-flex justify-content-center">
+        <button class="btn btn-success-gradient btn-lg px-4" @click="createBoardAction">Save</button>
+      </div>
 
         <button @click="closeCreateView" type="button"
           class="btn-close position-absolute top-0 end-0 m-3"

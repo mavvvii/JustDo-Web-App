@@ -1,23 +1,21 @@
 <div id="board-delete" v-scope class="floating-center-form">
-  <div class="card shadow-sm w-100" style="max-width: 500px;">
-    <div class="card-body position-relative">
+  <div class="card shadow-sm w-100 activation-card glass-card" style="max-width: 520px;">
+    <div class="card-body position-relative p-4 p-md-5 text-center">
       <h3 class="card-title text-center mb-4">Delete Board</h3>
 
       <label for="board" class="form-label">Select board to delete:</label>
 
-      <select class="form-select" id="board" v-model="selectedBoardID">
+      <select class="form-select text-center mb-3 form-control-lg rounded-pill" id="board" v-model="selectedBoardID">
         <option disabled value="">-- select --</option>
         <option v-for="board in boards" :value="board.id">{{ board.title }}</option>
       </select>
 
-      <button class="btn btn-danger mt-3" @click="deleteBoardAction">Delete</button>
+      <div class="d-flex justify-content-center gap-2">
+        <button class="btn btn-secondary-glass" @click="closeDeleteView">Cancel</button>
+        <button class="btn btn-danger-gradient" @click="deleteBoardAction">Delete</button>
+      </div>
 
-      <button @click="closeDeleteView"
-              type="button"
-              class="btn-close position-absolute top-0 end-0 m-3"
-              aria-label="Close"
-      >
-      </button>
+      <button @click="closeDeleteView" type="button" class="btn-close position-absolute top-0 end-0 m-3" aria-label="Close"></button>
 
       <div v-if="errorMessage" class="alert alert-danger mt-3">{{ errorMessage }}</div>
 

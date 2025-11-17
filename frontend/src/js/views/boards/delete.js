@@ -16,7 +16,9 @@ export function mountDeleteBoard() {
         const data = await getBoards();
         this.boards = data;
       } catch (err) {
-        this.errorMessage = 'Error during fetch boards: ' + err.message;
+        // don't display raw fetch errors to users in the form; keep boards empty
+        console.warn('Could not fetch boards for delete view:', err);
+        this.boards = [];
       }
     },
 
@@ -25,7 +27,12 @@ export function mountDeleteBoard() {
       if (view) {
         view.classList.add('fade-out');
         view.addEventListener('animationend', () => {
-          view.innerHTML = '';
+          const wrapper = view.closest('.loaded-view');
+          if (wrapper && wrapper.parentNode) {
+            wrapper.parentNode.removeChild(wrapper);
+          } else if (view.parentNode) {
+            view.parentNode.removeChild(view);
+          }
         }, { once: true });
       }
     },

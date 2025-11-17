@@ -1,15 +1,13 @@
 <div id="task-delete" v-scope class="floating-center-form">
-  <div class="card shadow-sm w-100" style="max-width: 500px;">
-    <div class="card-body position-relative">
+  <div class="card shadow-sm w-100 activation-card glass-card" style="max-width: 520px;">
+    <div class="card-body position-relative p-4 p-md-5 text-center">
       <h3 class="card-title text-center mb-4">Delete Task</h3>
 
       <p>Are you sure you want to delete task: <strong>{{ taskTitle }}</strong>?</p>
 
-      <div class="d-flex justify-content-end gap-2">
-        <button class="btn btn-secondary" @click="closeDeleteView">Cancel</button>
-        <button class="btn btn-danger" @click="deleteTaskAction" :disabled="isDeleting">
-          {{ isDeleting ? 'Deleting...' : 'Delete' }}
-        </button>
+      <div class="d-flex justify-content-center gap-2">
+        <button class="btn btn-secondary-glass" @click="closeDeleteView">Cancel</button>
+        <button class="btn btn-danger-gradient" @click="deleteTaskAction" :disabled="isDeleting">{{ isDeleting ? 'Deleting...' : 'Delete' }}</button>
       </div>
 
       <button @click="closeDeleteView" type="button"
