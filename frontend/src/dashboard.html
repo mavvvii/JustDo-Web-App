@@ -23,53 +23,91 @@
   <!-- Custom CSS -->
   <link href="css/main.css" rel="stylesheet" />
   <link href="css/dashboard.css" rel="stylesheet" />
-  <link href="css/form.css" rel="stylesheet" />
+  <link href="css/forms.css" rel="stylesheet" />
+  <link href="css/activate.css" rel="stylesheet" />
 </head>
 <body>
-  <div class="animation-delay fade">
-    <div id="particles-placeholder"></div>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light px-3">
-      <a class="navbar-brand me-3" href="#">JustDo</a>
-      <div class="d-flex align-items-center overflow-auto" id="board-nav" style="white-space: nowrap;"></div>
-      <div class="ms-auto d-flex gap-2">
-        <button
-          class="btn btn-outline-success btn-sm"
-          onclick="loadView('./forms/boards/create.html')"
-          title="Create Board"
-        >
-          +
-        </button>
-        <button
-          class="btn btn-outline-primary btn-sm"
-          onclick="loadView('./forms/boards/update.html')"
-          title="Update Board"
-        >
-          ✏️
-        </button>
-        <button
-          id="deleteBtn"
-          class="btn btn-outline-danger btn-sm"
-          onclick="loadView('./forms/boards/delete.html')"
-          title="Delete Board"
-        >
-          🗑️
-        </button>
-        <button
-          class="btn btn-outline-danger btn-sm bi-box-arrow-right"
-          onclick="logout()"
-          title="Logout"
-        >
-        </button>
-      </div>
-    </nav>
+    <div id="dashboard-root" class="animation-delay fade">
+      <div class="activation-container">
+        <div class="floating-shapes">
+          <div class="shape shape-1"></div>
+          <div class="shape shape-2"></div>
+          <div class="shape shape-3"></div>
+        </div>
 
-    <div id="content-area" class="container my-4"></div>
-  </div>
+      <nav class="navbar navbar-expand-lg glass-nav px-3">
+        <a class="navbar-brand nav-brand me-3" href="#" aria-label="JustDo home">
+          <div class="d-flex align-items-center gap-2">
+            <span class="logo-icon" aria-hidden="true"><i class="fa-solid fa-list-check"></i></span>
+            <div class="d-flex flex-column">
+              <span class="logo">JustDo</span>
+              <small class="logo-subtitle text-dark">organized tasks</small>
+            </div>
+          </div>
+        </a>
+
+        <div class="d-flex align-items-center overflow-auto color-white" id="board-nav" style="white-space: nowrap;"></div>
+
+        <div class="ms-auto d-flex gap-2 align-items-center">
+          <button
+            class="btn btn-success-gradient btn-sm"
+            onclick="loadView('./forms/boards/create.html')"
+            title="Create Board"
+          >
+            +
+          </button>
+
+          <button
+            class="btn btn-secondary-glass btn-sm"
+            onclick="loadView('./forms/boards/update.html')"
+            title="Update Board"
+          >
+            ✏️
+          </button>
+
+          <button
+            id="deleteBtn"
+            class="btn btn-danger-gradient btn-sm"
+            onclick="loadView('./forms/boards/delete.html')"
+            title="Delete Board"
+          >
+            🗑️
+          </button>
+
+          <button
+            class="btn btn-secondary-glass btn-sm bi-box-arrow-right"
+            onclick="logout()"
+            title="Logout"
+          >
+          </button>
+        </div>
+      </nav>
+
+      <!-- dashboard header (visual only) -->
+      <div class="container my-4">
+        <div id="dashboard-header" class="glass-card p-3 mb-4 dashboard-header fade-in-up">
+          <div class="d-flex align-items-center justify-content-start gap-3">
+            <!-- compact header: no title text as requested -->
+          </div>
+        </div>
+      </div>
+
+      <div id="content-area" class="container my-4 fade-in-up"></div>
+      </div>
+    </div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.2/vanilla-tilt.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.0.0/mdb.min.js"></script>
   <script src="js/scripts/particles-loader.js"></script>
   <script src="js/scripts/format-date.js"></script>
   <script type="module" src="js/scripts/load-view-handler.js"></script>
+  <script>
+    // Ensure logout exists on this page (keeps behavior consistent across pages)
+    function logout() {
+      if (confirm('Are you sure you want to logout?')) {
+        window.location.href = 'index.html';
+      }
+    }
+  </script>
 </body>
 </html>

@@ -33,3 +33,157 @@
 .task-buttons {
   flex-shrink: 0;
 }
+
+/* Themed dashboard layout to match activation/index */
+.dashboard-header .profile-avatar { width:72px; height:72px; border-radius:16px; display:flex; align-items:center; justify-content:center; font-size:1.6rem; }
+.dashboard-header h4 { margin-bottom: 0; }
+
+.boards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1rem;
+}
+
+.board-card-compact {
+  padding: 0.9rem 1rem;
+  border-radius: 12px;
+  transition: transform 0.22s ease, box-shadow 0.22s ease;
+}
+
+.board-card-compact:hover { transform: translateY(-6px); box-shadow: 0 12px 30px rgba(0,0,0,0.12); }
+
+.tasks-column {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+/* small helpers */
+.muted-small { color: var(--text-muted); font-size: 0.92rem; }
+
+/* Nav pills for boards injected into #board-nav */
+.board-nav-pill {
+  margin-right: 8px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(255,255,255,0.06);
+  color: rgba(255,255,255,0.95);
+  transition: all 0.18s ease;
+  backdrop-filter: blur(6px);
+}
+
+.board-nav-pill:hover {
+  transform: translateY(-2px);
+  background: rgba(255,255,255,0.12);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+}
+
+.board-nav-pill.active {
+  background: var(--primary-gradient);
+  color: #fff;
+  box-shadow: 0 10px 26px rgba(102,126,234,0.16);
+}
+
+/* Animations */
+.icon-pulse { animation: pulse 2s infinite; }
+
+/* Logo animation */
+.logo {
+  font-weight: 700;
+  font-size: 1.2rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.logo-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, rgba(102,126,234,0.9), rgba(118,75,162,0.9));
+  color: white;
+  box-shadow: 0 6px 18px rgba(102,126,234,0.18);
+  transform-origin: center;
+  animation: logo-bounce 3s ease-in-out infinite;
+}
+
+@keyframes logo-bounce {
+  0%, 100% { transform: translateY(0) scale(1); }
+  40% { transform: translateY(-4px) scale(1.03); }
+  70% { transform: translateY(-2px) scale(1.01); }
+}
+
+/* Board card polish */
+.board-card {
+  background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
+  border: 1px solid rgba(255,255,255,0.06);
+  padding: 1rem;
+  border-radius: 14px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.board-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(16,24,40,0.12);
+  background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.03));
+}
+
+/* Task card */
+.task-card {
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.04);
+  padding: 0.75rem 0.9rem;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  transition: background 0.18s ease, transform 0.12s ease;
+}
+
+.task-card:hover { background: rgba(255,255,255,0.035); transform: translateY(-3px); }
+
+/* small entrance animation for content blocks */
+.fade-in-up {
+  animation: fade-in-up 0.45s ease both;
+}
+
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 768px) {
+  .dashboard-header { padding: 1rem; }
+}
+
+/* Ensure decorative floating shapes do not intercept pointer events */
+.activation-container .floating-shapes {
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Lift navbar and main cards above the decorative shapes so buttons remain clickable */
+.glass-nav {
+  position: relative;
+  z-index: 5;
+}
+
+#dashboard-header, #content-area {
+  position: relative;
+  z-index: 3;
+}
+
+/* For dashboard, avoid transform-based entrance animation so fixed overlays (forms) stay centered */
+.animation-delay.fade {
+  /* replace transform-based fade with opacity-only to avoid creating a transformed ancestor */
+  animation-name: fade-in-no-transform;
+}
+
+@keyframes fade-in-no-transform {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}

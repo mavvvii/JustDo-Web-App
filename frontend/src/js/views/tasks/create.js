@@ -2,7 +2,22 @@ import { createTask } from '../../api/tasks.js';
 import { createApp } from 'https://unpkg.com/petite-vue?module';
 
 export function mountCreateTask(board_id, onTaskCreated) {
+  // If caller didn't pass board_id, try to recover from global activeBoard
   if (!board_id) {
+    board_id = window.activeBoard?.id;
+  }
+
+  // If still missing, remove the loaded template (to avoid showing raw mustache bindings)
+  // and show a native alert so the user knows to open a board first.
+  if (!board_id) {
+    const viewElement = document.getElementById('task-create');
+    if (viewElement) {
+      const wrapper = viewElement.closest('.loaded-view');
+      if (wrapper && wrapper.parentNode) wrapper.parentNode.removeChild(wrapper);
+      else if (viewElement.parentNode) viewElement.parentNode.removeChild(viewElement);
+    }
+    // fallback notification
+    alert('No board selected. Open a board before creating a task.');
     return;
   }
 
@@ -31,7 +46,12 @@ export function mountCreateTask(board_id, onTaskCreated) {
       if (view) {
         view.classList.add('fade-out');
         view.addEventListener('animationend', () => {
-          view.innerHTML = '';
+          const wrapper = view.closest('.loaded-view');
+          if (wrapper && wrapper.parentNode) {
+            wrapper.parentNode.removeChild(wrapper);
+          } else if (view.parentNode) {
+            view.parentNode.removeChild(view);
+          }
         }, { once: true });
       }
     },

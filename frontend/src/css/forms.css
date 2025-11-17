@@ -1,0 +1,71 @@
+.floating-center-form {
+  /* keep a centered overlay feel but make it visually consistent with activation card */
+  position: fixed;
+  inset: 0;
+  display: flex;
+  /* default center for small screens */
+  align-items: center;
+  justify-content: center;
+  z-index: 1050;
+  padding: 1.5rem;
+}
+
+.floating-center-form .card {
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.floating-center-form {
+  animation: fadeInUp 0.36s cubic-bezier(.2,.9,.3,1);
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.floating-center-form.fade-out { animation: fadeOutDown 0.28s ease forwards; }
+
+/* Lower overlays slightly on tall viewports so close buttons are visible */
+@media (min-height: 720px) {
+  .floating-center-form {
+    align-items: flex-start;
+    padding-top: 6vh; /* nudge down */
+  }
+  .floating-center-form .card {
+    max-height: calc(100vh - 12vh);
+    overflow: auto;
+  }
+}
+
+/* Keep centered on very small screens */
+@media (max-height: 480px) {
+  .floating-center-form {
+    align-items: center;
+    padding-top: 1rem;
+  }
+}
+
+@keyframes fadeOutDown { from { opacity: 1; transform: translateY(0); } to { opacity: 0; transform: translateY(8px); } }
+
+/* Inputs & buttons tuned to the main theme */
+.floating-center-form .form-control {
+  border-radius: 999px;
+  padding: 0.9rem 1rem;
+  border: 1px solid rgba(0,0,0,0.06);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.03);
+}
+
+.floating-center-form .form-control:focus {
+  outline: none;
+  box-shadow: 0 6px 24px rgba(102,126,234,0.12);
+  border-color: rgba(102,126,234,0.6);
+}
+
+.floating-center-form .btn-primary-gradient {
+  min-width: 140px;
+}
+
+.floating-center-form .logo { font-size: 1.8rem; font-weight:700; }
+.floating-center-form .logo-subtitle { font-size: 0.95rem; color: var(--text-muted); }

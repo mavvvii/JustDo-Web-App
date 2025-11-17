@@ -19,7 +19,10 @@ export function mountUpdateBoard() {
         this.boards = data;
         this.onBoardChange();
       } catch (err) {
-        this.errorMessage = 'Error during fetch boards: ' + err.message;
+        // don't display raw fetch errors to users in the form; keep boards empty
+        console.warn('Could not fetch boards for update view:', err);
+        this.boards = [];
+        this.onBoardChange();
       }
     },
 
@@ -44,7 +47,12 @@ export function mountUpdateBoard() {
       if (view) {
         view.classList.add('fade-out');
         view.addEventListener('animationend', () => {
-          view.innerHTML = '';
+          const wrapper = view.closest('.loaded-view');
+          if (wrapper && wrapper.parentNode) {
+            wrapper.parentNode.removeChild(wrapper);
+          } else if (view.parentNode) {
+            view.parentNode.removeChild(view);
+          }
         }, { once: true });
       }
     },

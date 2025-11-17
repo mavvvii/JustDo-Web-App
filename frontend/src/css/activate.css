@@ -1,0 +1,124 @@
+:root {
+  --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --success-color: #10b981;
+  --error-color: #ef4444;
+  --warning-color: #f59e0b;
+}
+
+.activation-container {
+  min-height: 100vh;
+  background: var(--primary-gradient);
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  position: relative;
+  overflow: hidden;
+}
+
+.activation-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background:
+    radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 40% 40%, rgba(120, 119, 198, 0.2) 0%, transparent 50%);
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-10px) rotate(1deg); }
+}
+
+.activation-card {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 20px;
+  box-shadow:
+    0 20px 40px rgba(0, 0, 0, 0.1),
+    0 0 0 1px rgba(255, 255, 255, 0.1);
+  position: relative;
+  z-index: 2;
+  transition: all 0.3s ease;
+}
+
+.activation-card:hover {
+  transform: translateY(-5px);
+  box-shadow:
+    0 25px 50px rgba(0, 0, 0, 0.15),
+    0 0 0 1px rgba(255, 255, 255, 0.2);
+}
+
+.logo-container { margin-bottom: 1rem; }
+
+.logo {
+  font-size: 2.8rem;
+  font-weight: 700;
+  background: var(--primary-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.logo-subtitle { color: #6b7280; font-size: 1rem; }
+
+.state-icon { font-size: 3.5rem; margin-bottom: 1rem; display: inline-block; }
+
+.state-content { animation: contentAppear 0.8s ease-out; }
+
+@keyframes contentAppear {
+  0% { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+.btn-primary-custom {
+  background: var(--primary-gradient);
+  border: none;
+  border-radius: 50px;
+  padding: 12px 35px;
+  font-weight: 600;
+  font-size: 1rem;
+  color: white;
+}
+
+.btn-secondary-custom {
+  background: transparent;
+  border: 2px solid #e5e7eb;
+  color: #6b7280;
+  border-radius: 50px;
+  padding: 10px 30px;
+}
+
+.floating-shapes { position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; z-index:1; }
+.shape { position: absolute; background: rgba(255,255,255,0.1); border-radius: 50%; animation: floatShape 15s infinite linear; }
+.shape-1 { width: 100px; height: 100px; top: 10%; left: 10%; }
+.shape-2 { width: 150px; height: 150px; top: 60%; right: 10%; }
+.shape-3 { width: 80px; height: 80px; bottom: 20%; left: 20%; }
+
+@keyframes floatShape {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  33% { transform: translateY(-30px) rotate(120deg); }
+  66% { transform: translateY(15px) rotate(240deg); }
+}
+
+.feature-list { text-align: left; margin: 2rem 0; }
+
+.feature-item { display:flex; align-items:center; margin-bottom:0.5rem; color: #6b7280; }
+.feature-item::before { content: '✓'; color: var(--success-color); font-weight:bold; margin-right:0.5rem; }
+
+.state-icon.icon-success { color: var(--success-color); }
+.state-icon.icon-error { color: var(--error-color); }
+.state-icon.icon-warning { color: var(--warning-color); }
+
+.icon-loading { color: #667eea; }
+
+.invalid-state .state-icon { color: var(--warning-color); }
+
+/* small responsive tweaks */
+@media (max-width: 768px) {
+  .logo { font-size: 2rem; }
+  .state-icon { font-size: 3rem; }
+}

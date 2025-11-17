@@ -25,10 +25,15 @@ export function mountCreateBoard() {
     closeCreateView() {
       const view = document.getElementById('board-create');
       if (view) {
-      view.classList.add('fade-out');
+        // animate then remove the loaded wrapper so it doesn't block the UI
+        view.classList.add('fade-out');
         view.addEventListener('animationend', () => {
-          view.innerHTML = '';
-
+          const wrapper = view.closest('.loaded-view');
+          if (wrapper && wrapper.parentNode) {
+            wrapper.parentNode.removeChild(wrapper);
+          } else if (view.parentNode) {
+            view.parentNode.removeChild(view);
+          }
         }, { once: true });
       }
     },

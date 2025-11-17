@@ -1,29 +1,24 @@
 <div id="board-update" v-scope class="floating-center-form">
-  <div class="card shadow-sm w-100" style="max-width: 500px;">
-    <div class="card-body position-relative">
+  <div class="card shadow-sm w-100 activation-card glass-card" style="max-width: 520px;">
+    <div class="card-body position-relative p-4 p-md-5 text-center">
       <h3 class="card-title text-center mb-4">Update Board</h3>
 
-      <label for="board-select" class="form-label">Select Board:</label>
-      <select id="board-select" class="form-select" v-model="selectedBoardID" @change="onBoardChange">
+      <select id="board-select" class="form-select text-center mb-3 form-control-lg rounded-pill" v-model="selectedBoardID" @change="onBoardChange">
         <option disabled value="">-- select board --</option>
         <option v-for="board in boards" :key="board.id" :value="board.id">
           {{ board.title }}
         </option>
       </select>
 
-      <label for="title" class="form-label mt-3">Title:</label>
-      <input id="title" type="text" class="form-control" v-model="title" placeholder="Enter title" />
+      <input id="title" type="text" class="form-control text-center mb-3 form-control-lg rounded-pill" v-model="title" placeholder="Enter title" />
 
-      <label for="description" class="form-label mt-3">Description:</label>
-      <textarea id="description" class="form-control" v-model="description" placeholder="Enter description"></textarea>
+      <textarea id="description" class="form-control text-center mb-3 form-control-lg rounded-pill" v-model="description" placeholder="Enter description"></textarea>
 
-      <button class="btn btn-primary mt-3" @click="updateBoardAction">Save</button>
+      <div class="d-flex justify-content-center">
+        <button class="btn btn-primary-gradient btn-lg" @click="updateBoardAction">Save</button>
+      </div>
 
-      <button @click="closeUpdateView"
-              type="button"
-              class="btn-close position-absolute top-0 end-0 m-3"
-              aria-label="Close">
-      </button>
+      <button @click="closeUpdateView" type="button" class="btn-close position-absolute top-0 end-0 m-3" aria-label="Close"></button>
 
       <div v-if="errorMessage" class="alert alert-danger mt-3">{{ errorMessage }}</div>
     </div>
